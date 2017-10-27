@@ -12,3 +12,28 @@ table.projects {
 	margin: 40px auto;
 	width: 80%;
 }
+
+td a {
+	display: block;
+}
+
+th .waves-effect {
+	z-index: 0;
+}
+
+[data-field="id"] {
+	width: 10%;
+}
+
+[data-field="name"] {
+	width: 50%;
+}
+
+[data-field="add"] {
+	width: 40%;
+}
+
+.inline {
+	display: inline-block;
+	/*color: inherit;*/
+}
