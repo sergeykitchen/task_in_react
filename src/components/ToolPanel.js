@@ -10,7 +10,7 @@ export default class ToolPanel extends Component {
 	render() {
 		
 		const {id, name} = this.props.project;
-		console.log(this.props)
+		
 		return (
 			<Col s={3}>
 				

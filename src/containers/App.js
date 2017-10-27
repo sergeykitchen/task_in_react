@@ -24,7 +24,11 @@ export default class App extends Component {
       .then(text => {
         this.setState({
           data: text
+        },
+        error => {
+          console.error(error)
         })
+
     })
   }
 
@@ -33,8 +37,9 @@ export default class App extends Component {
       .then(() => this.loadData())
   }
 
-  editProject = (id) => () => {
-
+  editProject = (id) => (e) => {
+    
+    alert(id)
   }
 
   addProject = () => {

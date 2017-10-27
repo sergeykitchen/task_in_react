@@ -5,27 +5,52 @@ import toggleWindow from '../decorators/toggleWindow';
 
 class ModalEdit extends Component {
 
+	state = {
+		value: null
+	}
+
+	handlerOnChange = (e, value) => {
+
+		e.preventDefault();
+		this.setState({
+			value: value
+		})
+
+	}
+
 	render() {
 		const {id, name } = this.props;
-		console.log(this.props)
 
+		
 		return (
 			<div className="inline">
 				<span onClick={this.props.openWindow}>
 	      	<Icon small>edit</Icon>
 	    	</span>
-	    	<Modal
-	    		isOpen={this.props.isOpen}
-	    		contantLabel="Edit project"
-    		 	onRequestClose= {this.props.closeWindow}
-				>
-					<Row>
-		  			<Input s={6} label="Change data" validate defaultValue={name} />
-	  			</Row>
-		  		<button onClick={this.props.closeWindow}>cancel</button>
-		  		<button onClick={()=>{}}>save</button>
-		  	</Modal>
-	  	</div>
+
+	    	
+		    	<Modal
+		    		isOpen={this.props.isOpen}
+		    		contantLabel="Edit project"
+	    		 	onRequestClose= {this.props.closeWindow}
+					>
+						<form onSubmit={this.props.edit(this.state.value)}>
+							<Row>
+								
+				  			<Input s={6}
+				  				ref = {input => {this.textInput = input;}} 
+				  				label="Change data" 
+			  					validate 
+			  					defaultValue={name} 
+			  					onChange = {this.handlerOnChange}
+		  					/>
+			  			</Row>
+				  		<button onClick={this.props.closeWindow}>cancel</button>
+				  		<button type="submit">save</button>
+			  		</form>
+
+			  	</Modal>
+		  	</div>
 		)
 	}
 }

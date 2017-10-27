@@ -13,7 +13,13 @@ class TableProjects extends Component{
        <tr key={project.id}>         
           <td>{project.id}</td>
           <td>{project.name}</td>
-          <td ><ToolPanel project={project} delete={this.props.delete}/></td>
+          <td>
+            <ToolPanel 
+              project={project} 
+              delete={this.props.delete}
+              edit={this.props.edit}
+            />
+          </td>
       </tr>
     ))
 
