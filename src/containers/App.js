@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import TableProjects from '../components/TableProjects';
+import Projects from '../components/Projects';
 import ProjectInfo from '../components/ProjectInfo';
-import makeRequest from '../makeRequest.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import makeRequest from '../makeRequest.js';
 
 
 
@@ -20,33 +20,21 @@ export default class App extends Component {
   }
 
   loadData = () => {
-    makeRequest('GET', 'http://localhost:3000/users')
+    makeRequest('GET', 'http://localhost:3000/projects')
       .then(text => {
         this.setState({
           data: text
-        },
-        error => {
-          console.error(error)
         })
-
-    })
-  }
-
-  deleteProject = (id) => () => {
-    makeRequest('DELETE', 'http://localhost:3000/users/' + id)
-      .then(() => this.loadData())
-  }
-
-  editProject = (id) => (e) => {
-    
-    alert(id)
-  }
-
-  addProject = () => {
-    
+      })
   }
 
   render() {
+
+    const WrapperProjects = (props) => {
+      return (
+        <Projects {...props} reload={this.loadData} data={this.state.data} />
+      )
+    }
 
     return(
       <div>
@@ -55,13 +43,7 @@ export default class App extends Component {
           <div>
             <Route 
               exact path="/" 
-              render={props => 
-                <TableProjects 
-                  {...props} data={this.state.data} 
-                  delete={this.deleteProject}
-                  edit={this.editProject}
-                />
-              }
+              component={WrapperProjects} 
             />
             <Route path="/info" 
               component={ProjectInfo} 

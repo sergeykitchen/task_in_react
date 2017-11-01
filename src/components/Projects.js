@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
-import { Table, Button, Row, Col, Icon } from 'react-materialize';
+import { Table } from 'react-materialize';
 import ToolPanel from './ToolPanel';
+import ModalAdder from './ModalAdder';
+import makeRequest from '../makeRequest';
 
 class TableProjects extends Component{
 
+
+  deleteProject = (id) => () => {
+    makeRequest('DELETE', 'http://localhost:3000/projects/' + id)
+      .then(() => this.props.reload())
+  }
+
+  editProject = (id, value) => () => {
+    makeRequest('PATCH', 'http://localhost:3000/projects/' + id, value)
+      .then(() => this.props.reload())
+  }
+
+  addProject = (value) => () => {
+    alert(value)
+  }
 
 
   render() {
@@ -16,8 +32,8 @@ class TableProjects extends Component{
           <td>
             <ToolPanel 
               project={project} 
-              delete={this.props.delete}
-              edit={this.props.edit}
+              remove={this.deleteProject}
+              edit={this.editProject}
             />
           </td>
       </tr>
@@ -31,7 +47,7 @@ class TableProjects extends Component{
             <th data-field="id">id</th>
             <th data-field="name">name</th>
             <th data-field="add">
-              <Button floating className="red" waves="light" icon="add" />
+            <ModalAdder add={this.addProject}/>
             </th>
           </tr>
           

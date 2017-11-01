@@ -17,9 +17,9 @@ td a {
 	display: block;
 }
 
-th .waves-effect {
+/*th .waves-effect {
 	z-index: 0;
-}
+}*/
 
 [data-field="id"] {
 	width: 10%;
