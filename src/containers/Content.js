@@ -8,7 +8,7 @@ import ErrorMessage from '../components/ErrorMessage';
 
 export default class Content extends React.Component {
 
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -22,22 +22,22 @@ export default class Content extends React.Component {
   loadData = () => {
     makeRequest('GET', 'http://localhost:3000/projects')
       .then(
-      	text => {
-	        this.setState({
-	          data: text
-	        })
-	      },
+        text => {
+          this.setState({
+            data: text
+          })
+        },
         error => {          
-       		this.setState({
-          	fail: error.message
-        })
-      }
-    )
+          this.setState({
+            fail: error.message
+          })
+        }
+      )
   }
 
   render() {
     
-  	const WrapperProjects = props => {
+    const WrapperProjects = props => {
       return (
         <Projects {...props} reload={this.loadData} data={this.state.data} />
       )
@@ -49,25 +49,25 @@ export default class Content extends React.Component {
       )
     }
 
-   	if(!this.state.fail) {
+    if(!this.state.fail) {
 
-   		return (
-		  	<Router>
-		      <div>
-		        <Route 
-		          exact path="/" 
-		          component={WrapperProjects} 
-		        />
-		        <Route path="/:id" component={WrapperProjectInfo}/>
-		      </div>
-		    </Router>
-	    )  	
-		}	
+      return (
+        <Router>
+          <div>
+            <Route 
+              exact path="/" 
+              component={WrapperProjects} 
+            />
+            <Route path="/:id" component={WrapperProjectInfo}/>
+          </div>
+        </Router>
+      )   
+    } 
 
-		return (
-			<ErrorMessage error={this.state.fail} />
-		)
- 	}
+    return (
+      <ErrorMessage error={this.state.fail} />
+    )
+  }
 }
 
  

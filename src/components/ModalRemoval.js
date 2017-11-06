@@ -5,30 +5,30 @@ import toggleWindow from '../decorators/toggleWindow'
 
 
 class ModalRemoval extends Component{
-	
-	render() {
-		
-		const {openWindow, closeWindow, isOpen, remove, id} = {...this.props};
+  
+  render() {
+    
+    const {openWindow, closeWindow, isOpen, remove, id} = {...this.props};
 
-		return (
-			<div className="inline">
-				<span onClick={openWindow}>
-	      	<Icon small>delete forever</Icon>
-	    	</span>
+    return (
+      <div className="inline">
+        <span onClick={openWindow}>
+          <Icon small>delete forever</Icon>
+        </span>
 
-				<Modal
-	    		isOpen={isOpen}
-	    		contantLabel="Delete project"
-    		 	onRequestClose= {closeWindow}
-				>
-		  		<h1>Delete project?</h1>
-		  		<button onClick={closeWindow}>cancel</button>
-		  		<button onClick={remove(id)}>delete</button>
-		  	</Modal>
-	  	
-	  	</div>
-		)
-	}
+        <Modal
+          isOpen={isOpen}
+          contantLabel="Delete project"
+          onRequestClose= {closeWindow}
+        >
+          <h1>Delete project?</h1>
+          <button onClick={closeWindow}>cancel</button>
+          <button onClick={remove(id)}>delete</button>
+        </Modal>
+      
+      </div>
+    )
+  }
 };
 
 export default toggleWindow(ModalRemoval);

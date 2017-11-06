@@ -5,13 +5,12 @@ import '../style.css'
 
 
 class Header extends Component {
-
   render() {
     return (
 
       <Navbar brand='POC' right>
-				<NavItem href='#'>Sergey Kitchenkov</NavItem>
-			</Navbar>
+        <NavItem href='#'>Sergey Kitchenkov</NavItem>
+      </Navbar>
     )
   }
 }
