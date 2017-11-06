@@ -17,10 +17,9 @@ class ModalAdder extends Component {
 	}
 
 	render() {
-
-		const {openWindow, closeWindow, isOpen} = {...this.props}
-
-
+		
+		const {openWindow, closeWindow, isOpen, add} = {...this.props};
+		
 		return (
 			<div>
 				<Button floating className='red'
@@ -35,19 +34,19 @@ class ModalAdder extends Component {
 				>
 					<h1>Create new project?</h1>
 					<Input s={6}
+						autoFocus
+						autoComplete="off"
 						type="text"
 						label="Input the name"
 						validate 
 						onChange={this.handlerOnChange}
 					/>
 					<button onClick={closeWindow}>cancel</button>
-					<button onClick={this.props.add(this.state.value)}>create</button>
+					<button onClick={add(this.state.value)}>create</button>
 				</Modal>
 			</div>		
 		)
 	}
 }	
 
-
-
-export default toggleWindow(ModalAdder)
+export default toggleWindow(ModalAdder);

@@ -3,31 +3,8 @@ import Modal from 'react-modal';
 import { Icon, Input} from 'react-materialize';
 import toggleWindow from '../decorators/toggleWindow';
 
-Modal.defaultStyles = {
-  overlay : {
-    position          : 'fixed',
-    top               : 0,
-    left              : 0,
-    right             : 0,
-    bottom            : 0,
-    backgroundColor   : 'rgba(255, 255, 255, 0.75)',
-    zIndex: 1000
-  },
-  content : {
-    position                   : 'absolute',
-    top                        : '40px',
-    left                       : '40px',
-    right                      : '40px',
-    bottom                     : '40px',
-    border                     : '1px solid #ccc',
-    background                 : '#fff',
-    overflow                   : 'auto',
-    WebkitOverflowScrolling    : 'touch',
-    borderRadius               : '4px',
-    outline                    : 'none',
-    padding                    : '20px'
-  }
-}
+Modal.defaultStyles.overlay.zIndex = 1000;
+  
 class ModalEdit extends Component {
 
 	state = {
@@ -54,6 +31,7 @@ class ModalEdit extends Component {
 	    		 	onRequestClose={closeWindow}
 					>
 						<Input s={6}
+							autoFocus
 							type="text"
 							label="Change data" 
 							validate 

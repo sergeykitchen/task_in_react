@@ -3,30 +3,58 @@ import { Table } from 'react-materialize';
 import ToolPanel from './ToolPanel';
 import ModalAdder from './ModalAdder';
 import makeRequest from '../makeRequest';
+import ErrorMessage from '../components/ErrorMessage';
 
-class TableProjects extends Component{
+class Projects extends Component{
 
+  state = {
+    fail: false
+  }
 
   deleteProject = (id) => () => {
     makeRequest('DELETE', 'http://localhost:3000/projects/' + id)
-      .then(() => this.props.reload())
+      .then(() => this.props.reload(),
+        error => {
+          this.setState({
+              fail: error.message
+            }
+          )
+        }
+      )
   }
 
   editProject = (id, value) => () => {
     makeRequest('PATCH', 'http://localhost:3000/projects/' + id, value)
-      .then(() => this.props.reload())
+      .then(() => this.props.reload(),
+        error => {
+          this.setState({
+              fail: error.message
+            }
+          )
+        }
+      )
   }
 
-  addProject = (value) => () => {
-    alert(value)
+  addProject = (data) => () => {
+    makeRequest('POST', 'http://localhost:3000/projects', data)
+      .then(() => this.props.reload(),
+        error => {
+          this.setState({
+              fail: error.message
+            }
+          )
+        }
+      )
   }
 
 
   render() {
     if(this.props.data === null) return <h1>loading...</h1>;
-    
-    const rowsArr = JSON.parse(this.props.data).map((project) => (
-       <tr key={project.id}>         
+    let lastIndex = null;
+    const rowsArr = JSON.parse(this.props.data).map((project) => {
+     
+      return (
+        <tr key={project.id}>         
           <td>{project.id}</td>
           <td>{project.name}</td>
           <td>
@@ -36,30 +64,33 @@ class TableProjects extends Component{
               edit={this.editProject}
             />
           </td>
-      </tr>
-    ))
+        </tr>
+      )
+    })
+    if(!this.state.fail) {
 
+      return (
+        <Table className="projects">
+          <thead>
+            <tr>            
+              <th data-field="id">id</th>
+              <th data-field="name">name</th>
+              <th data-field="add">
+              <ModalAdder add={this.addProject} lastIndex={lastIndex}/>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+             {rowsArr}
+          </tbody>
+        </Table>
+      )
+    }
     return (
-      <Table className="projects">
-        <thead>
-         
-          <tr>            
-            <th data-field="id">id</th>
-            <th data-field="name">name</th>
-            <th data-field="add">
-            <ModalAdder add={this.addProject}/>
-            </th>
-          </tr>
-          
-        </thead>
-        <tbody>
-           {rowsArr}
-        </tbody>
-
-      </Table>
-    )
+       <ErrorMessage error={this.state.fail} />
+    )    
   }
 };
 
-export default TableProjects;
+export default Projects;
 

@@ -4,12 +4,11 @@ export default (method, url, data) => {
 			const request = new XMLHttpRequest();
 
 			request.open(method, url, true);
-
-			let body = 'name='+ data; 
+		
 			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
 			request.onload = function() {
-				if(this.status === 200) {
+				if(this.status >= 200 && this.status < 300) {
 					resolve(this.responseText)
 				} else {
 					const error = new Error(this.statusText);
@@ -21,12 +20,11 @@ export default (method, url, data) => {
 			request.onerror = function() {
 				reject(new Error('Network error'))
 			}
+
 			if(method === 'GET' || method === 'DELETE') request.send();
 
-			else if (method === 'PATCH') {
-
-				request.send(body);
+			else if (method === 'PATCH' || method === 'POST') {
+				request.send('name='+ data);
 			}
-
 		});
 	}
