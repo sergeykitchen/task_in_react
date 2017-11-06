@@ -43,14 +43,7 @@ export default class Content extends React.Component {
       )
     }
 
-    const WrapperProjectInfo = props => {
-      return (
-        <ProjectInfo {...props}  />
-      )
-    }
-
     if(!this.state.fail) {
-
       return (
         <Router>
           <div>
@@ -58,7 +51,7 @@ export default class Content extends React.Component {
               exact path="/" 
               component={WrapperProjects} 
             />
-            <Route path="/:id" component={WrapperProjectInfo}/>
+            <Route path="/:id" component={ProjectInfo}/>
           </div>
         </Router>
       )   

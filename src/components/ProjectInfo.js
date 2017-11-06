@@ -11,29 +11,32 @@ export default class ProjectInfo extends Component {
       data: null,
       fail: false
     };
+    this.loadProject();
+    
   }
 
-  render() {
+  
 
+  loadProject = () => {
     makeRequest('GET', 'http://localhost:3000/projects'+ this.props.match.url)
       .then(
         text => {
-          if(this.state.data === null)  
           this.setState({
             data: text
           })
           
         },
         error => { 
-           
-          if(!this.state.fail)        
             this.setState({
-                fail: error.message
+              fail: error.message
           }
         )
       }
     )
 
+  }
+
+  render() {
     if(this.state.data !== null) {
 
       const info = JSON.parse(this.state.data);
