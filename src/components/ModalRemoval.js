@@ -1,34 +1,41 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Modal from 'react-modal';
-import { Icon } from 'react-materialize';
-import toggleWindow from '../decorators/toggleWindow'
+import {Icon, Button} from 'react-materialize';
+import toggleWindow from '../decorators/toggleWindow';
+import ReactTooltip from 'react-tooltip';
 
-
-class ModalRemoval extends Component{
-  
+class ModalRemoval extends Component {
   render() {
-    
     const {openWindow, closeWindow, isOpen, remove, id} = {...this.props};
 
     return (
       <div className="inline">
-        <span onClick={openWindow}>
-          <Icon small>delete forever</Icon>
+        <span onClick={openWindow} data-tip="delete project" data-for="delete">
+          <Icon>delete forever</Icon>
         </span>
-
+        <ReactTooltip
+          id="delete"
+          className="toolThemeDelete"
+          border
+          delayShow={500}
+        />
         <Modal
           isOpen={isOpen}
           contantLabel="Delete project"
-          onRequestClose= {closeWindow}
+          onRequestClose={closeWindow}
+          className="modal delete"
         >
-          <h1>Delete project?</h1>
-          <button onClick={closeWindow}>cancel</button>
-          <button onClick={remove(id)}>delete</button>
+          <h3>Delete project?</h3>
+          <div className="tool">
+            <Button onClick={closeWindow}>cancel</Button>
+            <Button className="right" onClick={remove(id)}>
+              delete
+            </Button>
+          </div>
         </Modal>
-      
       </div>
-    )
+    );
   }
-};
+}
 
 export default toggleWindow(ModalRemoval);

@@ -1,5 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
-export default function Brand(props) {
-  return <div>POC</div>
-};
+export default props => (
+  <div
+    onClick={e => {
+      e.preventDefault();
+    }}
+  >
+    <Link to="/">POC</Link>
+  </div>
+);

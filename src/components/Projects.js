@@ -1,96 +1,97 @@
-import React, { Component } from 'react';
-import { Table } from 'react-materialize';
+import React, {Component} from 'react';
+import {Table} from 'react-materialize';
 import ToolPanel from './ToolPanel';
 import ModalAdder from './ModalAdder';
 import makeRequest from '../makeRequest';
 import ErrorMessage from '../components/ErrorMessage';
+import {Link} from 'react-router-dom';
 
-class Projects extends Component{
-
+class Projects extends Component {
   state = {
     fail: false
-  }
+  };
 
-  deleteProject = (id) => () => {
-    makeRequest('DELETE', 'http://localhost:3000/projects/' + id)
-      .then(() => this.props.reload(),
-        error => {
-          this.setState({
-              fail: error.message
-            }
-          )
-        }
-      )
-  }
+  deleteProject = id => () => {
+    makeRequest('DELETE', 'http://localhost:3000/projects/' + id).then(
+      () => this.props.reload(),
+      error => {
+        this.setState({
+          fail: error.message
+        });
+      }
+    );
+  };
 
   editProject = (id, value) => () => {
-    makeRequest('PATCH', 'http://localhost:3000/projects/' + id, value)
-      .then(() => this.props.reload(),
-        error => {
-          this.setState({
-              fail: error.message
-            }
-          )
-        }
-      )
-  }
+    if (!value) {
+      this.props.reload();
+      return;
+    }
+    makeRequest('PATCH', 'http://localhost:3000/projects/' + id, value).then(
+      () => this.props.reload(),
+      error => {
+        this.setState({
+          fail: error.message
+        });
+      }
+    );
+  };
 
-  addProject = (data) => () => {
-    makeRequest('POST', 'http://localhost:3000/projects', data)
-      .then(() => this.props.reload(),
-        error => {
-          this.setState({
-              fail: error.message
-            }
-          )
-        }
-      )
-  }
-
+  addProject = data => () => {
+    if (!data) {
+      this.props.reload();
+      return;
+    }
+    makeRequest('POST', 'http://localhost:3000/projects', data).then(
+      () => this.props.reload(),
+      error => {
+        this.setState({
+          fail: error.message
+        });
+      }
+    );
+  };
 
   render() {
-    if(this.props.data === null) return <h1>loading...</h1>;
+    if (this.props.data === null) return <h1>loading...</h1>;
     let lastIndex = null;
-    const rowsArr = JSON.parse(this.props.data).map((project) => {
-     
+    const rowsArr = JSON.parse(this.props.data).map(project => {
       return (
-        <tr key={project.id}>         
+        <tr key={project.id}>
           <td>{project.id}</td>
-          <td>{project.name}</td>
           <td>
-            <ToolPanel 
-              project={project} 
+            <Link className="inline" to={'/' + project.id}>
+              {project.name}
+            </Link>
+          </td>
+          <td>
+            <ToolPanel
+              project={project}
               remove={this.deleteProject}
               edit={this.editProject}
             />
           </td>
         </tr>
-      )
-    })
-    if(!this.state.fail) {
-
+      );
+    });
+    if (!this.state.fail) {
       return (
         <Table className="projects">
           <thead>
-            <tr>            
+            <tr>
               <th data-field="id">id</th>
               <th data-field="name">name</th>
               <th data-field="add">
-              <ModalAdder add={this.addProject} lastIndex={lastIndex}/>
+                <ModalAdder add={this.addProject} lastIndex={lastIndex} />
               </th>
             </tr>
           </thead>
-          <tbody>
-             {rowsArr}
-          </tbody>
+          <tbody>{rowsArr}</tbody>
         </Table>
-      )
+      );
     }
-    return (
-       <ErrorMessage error={this.state.fail} />
-    )    
+    return <ErrorMessage error={this.state.fail} />;
   }
-};
+}
 
 export default Projects;
-

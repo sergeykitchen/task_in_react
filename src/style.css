@@ -1,6 +1,10 @@
+#container {
+  width: 100%;
+}
+
 .col.s12 {
   width: 95%;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 nav {
@@ -17,23 +21,102 @@ td a {
   display: block;
 }
 
-/*th .waves-effect {
-  z-index: 0;
-}*/
-
-[data-field="id"] {
+[data-field='id'] {
   width: 10%;
 }
 
-[data-field="name"] {
+[data-field='name'] {
   width: 50%;
 }
 
-[data-field="add"] {
+[data-field='add'] {
   width: 40%;
 }
 
 .inline {
   display: inline-block;
-  /*color: inherit;*/
+  color: inherit;
+  width: 30px;
+  margin: 0 10px;
+}
+
+.modal {
+  border-radius: 4px;
+  padding: 20px;
+  display: block;
+  margin: 40px auto;
+  height: auto;
+  box-shadow: 2px 2px 5px #000408;
+  width: 500px;
+  height: 210px;
+}
+
+.delete {
+  background: url('images/remove.png') no-repeat 2% 30%/20% hsl(9, 77%, 55%);
+  color: rgb(255, 255, 255);
+}
+
+h3 {
+  text-align: center;
+}
+
+.delete h3 {
+  margin-left: 30%;
+  margin-top: 30px;
+}
+
+.edit,
+.adder {
+  background: #8ad3b7;
+}
+
+input {
+  color: #fff;
+}
+
+.delete .tool {
+  margin-top: 55px;
+}
+
+.color i {
+  color: #4db5ab;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.info_project {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #e1f1f0;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.error {
+  width: 90%;
+  background: #f50808;
+  color: rgb(3, 31, 31);
+  margin: 30px auto;
+}
+.toolTheme {
+  color: #000 !important;
+  background-color: #8ad3b7 !important;
+}
+
+.toolTheme:after {
+  border-top-color: #8ad3b7 !important;
+  border-top-style: solid !important;
+  border-top-width: 6px !important;
+}
+
+.toolThemeDelete {
+  color: rgb(255, 255, 255) !important;
+  background-color: hsl(9, 77%, 55%) !important;
+}
+
+.toolThemeDelete:after {
+  border-top-color: hsl(9, 77%, 55%) !important;
+  border-top-style: solid !important;
+  border-top-width: 6px !important;
 }

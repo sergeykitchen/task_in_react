@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import makeRequest from '../makeRequest';
 import ErrorMessage from './ErrorMessage';
 export default class ProjectInfo extends Component {
-
   constructor(props) {
-
     super(props);
 
     this.state = {
@@ -12,42 +10,37 @@ export default class ProjectInfo extends Component {
       fail: false
     };
     this.loadProject();
-    
   }
-
-  
 
   loadProject = () => {
-    makeRequest('GET', 'http://localhost:3000/projects'+ this.props.match.url)
-      .then(
-        text => {
-          this.setState({
-            data: text
-          })
-          
-        },
-        error => { 
-            this.setState({
-              fail: error.message
-          }
-        )
+    makeRequest(
+      'GET',
+      'http://localhost:3000/projects' + this.props.match.url
+    ).then(
+      text => {
+        this.setState({
+          data: text
+        });
+      },
+      error => {
+        this.setState({
+          fail: error.message
+        });
       }
-    )
-
-  }
+    );
+  };
 
   render() {
-    if(this.state.data !== null) {
-
+    if (this.state.data !== null) {
       const info = JSON.parse(this.state.data);
-      
+
       return (
-        <p>It is the project with name: {info.name}</p>
-      )
+        <div className="info_project">
+          <p>It is the project with name: {info.name}</p>
+        </div>
+      );
     }
-      
-    return (
-      <ErrorMessage error={this.state.fail} />
-    )     
+
+    return <ErrorMessage error={this.state.fail} />;
   }
 }
