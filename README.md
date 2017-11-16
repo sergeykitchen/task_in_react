@@ -1,15 +1,27 @@
 Приложение на React.js для добавления,
-======================
+=============================================
 редактирования и удаления данных в JSON  файл.
+==============================================
 
-Для запуска приложения :
+    ***Важно***: 
+        Первым нужно запускать сервер с базой данных
 
-> npm start
 
-Сервер с базой данных запускался с помощью [json-server](https://code.tutsplus.com/ru/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871), файл вида:
+Для запуска сервера базы данных использовать [json-server](https://code.tutsplus.com/ru/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871), файл вида:
 
 >{
 >  "projects": []
 >}
 
 JSON расположен на http://localhost:3000/ 
+Для запуска приложения :
+
+Клонировать рпозиторий, выполнить:
+
+> npm install
+
+после:
+
+> npm start
+
+
