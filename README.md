@@ -2,25 +2,25 @@
 =============================================
 редактирования и удаления данных в JSON  файл.
 ==============================================
+  
 
-    ***Важно***: 
-        Первым нужно запускать сервер с базой данных
+Для запуска сервера базы данных использовать [json-server](https://code.tutsplus.com/ru/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871).
 
 
-Для запуска сервера базы данных использовать [json-server](https://code.tutsplus.com/ru/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871), файл вида:
-
->{
->  "projects": []
->}
-
-JSON расположен на http://localhost:3000/ 
-Для запуска приложения :
 
 Клонировать рeпозиторий, выполнить:
 
 > npm install
 
-после:
+Для установки сервера ,базы данных выполнить:
+
+>npm install -g json-server
+
+Файл с "базой данных" :
+
+#### ./info.json
+
+После:
 
 > npm start
 

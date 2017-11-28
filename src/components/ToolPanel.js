@@ -8,10 +8,10 @@ export default class ToolPanel extends Component {
     const {id, name} = this.props.project;
 
     return (
-      <Col s={3} className="color">
+      <div className="color">
         <ModalEditer id={id} name={name} edit={this.props.edit} />
         <ModalRemoval id={id} remove={this.props.remove} />
-      </Col>
+      </div>
     );
   }
 }

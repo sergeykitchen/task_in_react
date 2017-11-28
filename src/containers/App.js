@@ -6,7 +6,7 @@ import ProjectInfo from '../components/ProjectInfo';
 import ErrorMessage from '../components/ErrorMessage';
 import Header from '../components/Header';
 
-export default class Content extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 

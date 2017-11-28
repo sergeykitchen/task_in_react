@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Content from './containers/Content';
+import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 
-render(<Content />, document.querySelector('#container'));
+render(<App />, document.querySelector('#container'));
 registerServiceWorker();

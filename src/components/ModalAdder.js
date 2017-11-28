@@ -3,6 +3,7 @@ import {Button, Input} from 'react-materialize';
 import Modal from 'react-modal';
 import toggleWindow from '../decorators/toggleWindow';
 import ReactTooltip from 'react-tooltip';
+import MyModal from './MyModal';
 
 class ModalAdder extends Component {
   state = {
@@ -30,12 +31,7 @@ class ModalAdder extends Component {
           onClick={openWindow}
         />
         <ReactTooltip id="edit" className="toolTheme" border delayShow={500} />
-        <Modal
-          isOpen={isOpen}
-          contentLabel="Add project"
-          onRequestClose={closeWindow}
-          className="modal adder"
-        >
+        <MyModal extraClass="adder" {...this.props}>
           <h3>Create new project</h3>
           <Input
             s={6}
@@ -50,7 +46,7 @@ class ModalAdder extends Component {
           <Button className="right" onClick={add(this.state.value.trim())}>
             create
           </Button>
-        </Modal>
+        </MyModal>
       </div>
     );
   }

@@ -11,7 +11,7 @@ class ModalRemoval extends Component {
     return (
       <div className="inline">
         <span onClick={openWindow} data-tip="delete project" data-for="delete">
-          <Icon>delete forever</Icon>
+          <Icon>remove</Icon>
         </span>
         <ReactTooltip
           id="delete"
