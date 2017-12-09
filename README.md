@@ -1,26 +1,19 @@
-Приложение на React.js для добавления,
+CRUD application on reactjs 
 =============================================
-редактирования и удаления данных в JSON  файл.
-==============================================
-  
 
-Для запуска сервера базы данных использовать [json-server](https://code.tutsplus.com/ru/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871).
-
-
-
-Клонировать рeпозиторий, выполнить:
+Install node modules:
 
 > npm install
 
-Для установки сервера ,базы данных выполнить:
+Install json-server for mockingbackend api
 
 >npm install -g json-server
 
-Файл с "базой данных" :
+The database file :
 
 #### ./info.json
 
-После:
+Run applicaton
 
 > npm start
 
