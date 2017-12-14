@@ -43,7 +43,7 @@ class ModalAdder extends Component {
             onChange={this.handlerOnChange}
           />
           <Button onClick={closeWindow}>cancel</Button>
-          <Button className="right" onClick={add(this.state.value.trim())}>
+          <Button className="right" onClick={add(this.state.value)}>
             create
           </Button>
         </MyModal>

@@ -6,3 +6,9 @@ export function showProjects(projects) {
     payload: projects
   };
 }
+
+export function reloadData() {
+  return {
+    type: 'RELOAD_DATA'
+  };
+}

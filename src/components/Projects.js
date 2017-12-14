@@ -4,7 +4,9 @@ import ToolPanel from './ToolPanel';
 import ModalAdder from './ModalAdder';
 import makeRequest from '../makeRequest';
 import ErrorMessage from '../components/ErrorMessage';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {reloadData} from '../actions';
 
 class Projects extends Component {
   state = {
@@ -12,8 +14,8 @@ class Projects extends Component {
   };
 
   deleteProject = id => () => {
-    makeRequest('DELETE', 'http://localhost:3000/projects/' + id).then(
-      () => this.props.reload(),
+    fetch(`http://localhost:3000/projects/${id}`, {method: 'DELETE'}).then(
+      () => this.props.reloadData(),
       error => {
         this.setState({
           fail: error.message
@@ -24,11 +26,20 @@ class Projects extends Component {
 
   editProject = (id, value) => () => {
     if (!value) {
-      this.props.reload();
+      this.props.reloadData();
       return;
     }
-    makeRequest('PATCH', 'http://localhost:3000/projects/' + id, value).then(
-      () => this.props.reload(),
+
+    fetch(`http://localhost:3000/projects/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: `name=${value}`
+    }).then(
+      () => {
+        this.props.reloadData();
+      },
       error => {
         this.setState({
           fail: error.message
@@ -39,11 +50,19 @@ class Projects extends Component {
 
   addProject = data => () => {
     if (!data) {
-      this.props.reload();
+      this.props.reloadData();
       return;
     }
-    makeRequest('POST', 'http://localhost:3000/projects', data).then(
-      () => this.props.reload(),
+    fetch(`http://localhost:3000/projects`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: `name=${data}`
+    }).then(
+      () => {
+        this.props.reloadData();
+      },
       error => {
         this.setState({
           fail: error.message
@@ -94,4 +113,4 @@ class Projects extends Component {
   }
 }
 
-export default Projects;
+export default connect(null, {reloadData})(Projects);

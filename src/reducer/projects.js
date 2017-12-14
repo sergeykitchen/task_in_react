@@ -1,19 +1,12 @@
 import {SHOW_PROJECTS} from '../actions';
 
-const initialState = {
-  projects: null
-};
-
-export default (state = initialState, action) => {
+export default (projects = null, action) => {
   const {type, payload} = action;
 
   switch (type) {
     case SHOW_PROJECTS:
-      return {
-        ...state,
-        projects: payload
-      };
+      return payload;
     default:
-      return state;
+      return projects;
   }
 };
