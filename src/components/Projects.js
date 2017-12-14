@@ -54,8 +54,8 @@ class Projects extends Component {
 
   render() {
     if (this.props.data === null) return <h1>loading...</h1>;
-    let lastIndex = null;
-    const rowsArr = JSON.parse(this.props.data).map(project => {
+
+    const rowsArr = this.props.data.map(project => {
       return (
         <tr key={project.id}>
           <td>{project.id}</td>
@@ -82,7 +82,7 @@ class Projects extends Component {
               <th data-field="id">id</th>
               <th data-field="name">name</th>
               <th data-field="add">
-                <ModalAdder add={this.addProject} lastIndex={lastIndex} />
+                <ModalAdder add={this.addProject} />
               </th>
             </tr>
           </thead>
