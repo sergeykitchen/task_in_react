@@ -1,24 +1,53 @@
 import {call, put, takeEvery, all} from 'redux-saga/effects';
 import * as actions from '../actions';
-import {deleteProject} from '../actions';
 
 export function fetchData(url, method, id) {
-  return fetch(url, {method: method}).then(response => response.json());
+  return fetch(url, {method: method})
+    .then(response => {
+      if (response.status !== 200) {
+        return Promise.reject(new Error(response.statusText));
+      }
+      return Promise.resolve(response);
+    })
+    .then(response => response.json());
 }
 
 export function* fetchProjects() {
-  const projects = yield call(
-    fetchData,
-    'http://localhost:3000/projects',
-    'GET'
-  );
-  yield put(actions.showProjects(projects));
+  try {
+    const projects = yield call(
+      fetchData,
+      `http://localhost:3000/projects`,
+      'GET'
+    );
+    yield put(actions.showProjects(projects));
+  } catch (error) {
+    yield put(actions.showError(error));
+  }
 }
 
-export function* reloadData() {
-  yield takeEvery('RELOAD_DATA', fetchProjects);
+export function* fetchOneProject(action) {
+  const id = action.payload;
+  try {
+    const project = yield call(
+      fetchData,
+      `http://localhost:3000/projects/${id}`,
+      'GET'
+    );
+
+    yield put(actions.showProject(project));
+  } catch (error) {
+    yield put(actions.showError(error));
+  }
+}
+
+export function* updateData() {
+  yield takeEvery(actions.UPDATE_DATA, fetchProjects);
+}
+
+export function* loadProject() {
+  yield takeEvery(actions.LOAD_ONE_PROJECT, fetchOneProject);
 }
 
 export default function* rootSaga() {
-  yield all([reloadData(), fetchProjects()]);
+  yield all([fetchProjects(), updateData(), loadProject()]);
 }

@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {Table} from 'react-materialize';
-import ToolPanel from './ToolPanel';
-import ModalAdder from './ModalAdder';
-import makeRequest from '../makeRequest';
+import ToolPanel from '../components/ToolPanel';
+import ModalAdder from '../components/ModalAdder';
 import ErrorMessage from '../components/ErrorMessage';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {reloadData} from '../actions';
+import {updateData} from '../actions';
 
 class Projects extends Component {
   state = {
@@ -15,7 +14,7 @@ class Projects extends Component {
 
   deleteProject = id => () => {
     fetch(`http://localhost:3000/projects/${id}`, {method: 'DELETE'}).then(
-      () => this.props.reloadData(),
+      () => this.props.updateData(),
       error => {
         this.setState({
           fail: error.message
@@ -26,7 +25,7 @@ class Projects extends Component {
 
   editProject = (id, value) => () => {
     if (!value) {
-      this.props.reloadData();
+      this.props.updateData();
       return;
     }
 
@@ -38,7 +37,7 @@ class Projects extends Component {
       body: `name=${value}`
     }).then(
       () => {
-        this.props.reloadData();
+        this.props.updateData();
       },
       error => {
         this.setState({
@@ -50,7 +49,7 @@ class Projects extends Component {
 
   addProject = data => () => {
     if (!data) {
-      this.props.reloadData();
+      this.props.updateData();
       return;
     }
     fetch(`http://localhost:3000/projects`, {
@@ -61,7 +60,7 @@ class Projects extends Component {
       body: `name=${data}`
     }).then(
       () => {
-        this.props.reloadData();
+        this.props.updateData();
       },
       error => {
         this.setState({
@@ -113,4 +112,4 @@ class Projects extends Component {
   }
 }
 
-export default connect(null, {reloadData})(Projects);
+export default connect(null, {updateData})(Projects);

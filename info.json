@@ -1,3 +1,12 @@
 {
-  "projects": []
+  "projects": [
+    {
+      "name": "me",
+      "id": 4
+    },
+    {
+      "name": "trololo",
+      "id": 5
+    }
+  ]
 }
