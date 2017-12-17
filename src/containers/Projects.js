@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Table} from 'react-materialize';
 import ToolPanel from '../components/ToolPanel';
-import ModalAdder from './ModalAdder';
+import ModalAdder from '../components/ModalAdder';
 import ErrorMessage from '../components/ErrorMessage';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -15,14 +15,17 @@ class Projects extends Component {
   };
 
   deleteProject = id => () => {
-    fetch(`http://localhost:3000/projects/${id}`, {method: 'DELETE'}).then(
-      () => this.props.updateData(),
-      error => {
-        this.setState({
-          fail: error.message
+    return fetch(`http://localhost:3000/projects/${id}`, {
+      method: 'DELETE'
+    }).then(response => {
+      if (response.status >= 400) {
+        throw new SubmissionError({
+          _error: 'project wasn`t deleted: network error'
         });
+      } else {
+        this.props.updateData();
       }
-    );
+    });
   };
 
   editProject = (id, value) => () => {
@@ -54,7 +57,7 @@ class Projects extends Component {
       this.props.updateData();
       return;
     }
-    return fetch(`http://localhost:3000/project`, {
+    return fetch(`http://localhost:3000/projects`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'

@@ -5,7 +5,7 @@ export default (projects = null, action) => {
 
   switch (type) {
     case SHOW_PROJECTS:
-      return [].concat(...payload);
+      return [...payload];
     default:
       return projects;
   }

@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 
 class FormAdder extends Component {
   render() {
-    console.log(this.props); //undefined
     return (
       <form onSubmit={this.props.handleSubmit(this.props.add(this.props.name))}>
         <h3>Create new project</h3>

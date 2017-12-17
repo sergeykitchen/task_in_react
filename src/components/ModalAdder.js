@@ -2,15 +2,14 @@ import React, {Component} from 'react';
 import {Button} from 'react-materialize';
 import Modal from 'react-modal';
 import {initialize} from 'redux-form';
-import {connect} from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import toggleWindow from '../decorators/toggleWindow';
 import MyModal from '../components/MyModal';
-import FormAdder from '../components/FormAdder';
+import FormAdder from '../containers/FormAdder';
 
 class ModalAdder extends Component {
   render() {
-    const {openWindow, closeWindow, isOpen, add} = {...this.props};
+    const {openWindow, closeWindow, isOpen, add} = this.props;
 
     return (
       <div>
@@ -32,4 +31,4 @@ class ModalAdder extends Component {
   }
 }
 
-export default connect()(toggleWindow(ModalAdder));
+export default toggleWindow(ModalAdder);

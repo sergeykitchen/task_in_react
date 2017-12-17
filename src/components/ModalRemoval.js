@@ -3,10 +3,11 @@ import Modal from 'react-modal';
 import {Icon, Button} from 'react-materialize';
 import toggleWindow from '../decorators/toggleWindow';
 import ReactTooltip from 'react-tooltip';
+import FormRemoval from '../containers/FormRemoval';
 
 class ModalRemoval extends Component {
   render() {
-    const {openWindow, closeWindow, isOpen, remove, id} = {...this.props};
+    const {openWindow, closeWindow, isOpen, remove, id} = this.props;
 
     return (
       <div className="inline">
@@ -25,13 +26,12 @@ class ModalRemoval extends Component {
           onRequestClose={closeWindow}
           className="modal delete"
         >
-          <h3>Delete project?</h3>
-          <div className="tool">
-            <Button onClick={closeWindow}>cancel</Button>
-            <Button className="right" onClick={remove(id)}>
-              delete
-            </Button>
-          </div>
+          <FormRemoval
+            isOpen={isOpen}
+            closeWindow={closeWindow}
+            id={id}
+            remove={remove}
+          />
         </Modal>
       </div>
     );
