@@ -33,6 +33,9 @@ td a {
   width: 40%;
 }
 
+form {
+  padding-bottom: 0;
+}
 .inline {
   display: inline-block;
   color: inherit;
@@ -42,13 +45,16 @@ td a {
 
 .modal {
   border-radius: 4px;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   display: block;
   margin: 40px auto;
-  height: auto;
   box-shadow: 2px 2px 5px #000408;
   width: 500px;
-  height: 210px;
+  height: 250px;
+}
+
+.modal label {
+  font-size: 1em;
 }
 
 .delete {
@@ -119,4 +125,12 @@ input {
   border-top-color: hsl(9, 77%, 55%) !important;
   border-top-style: solid !important;
   border-top-width: 6px !important;
+}
+
+form .error {
+  background: transparent;
+  color: red;
+  text-align: center;
+  margin: 10px auto;
+  font-size: 20px;
 }

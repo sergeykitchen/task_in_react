@@ -5,7 +5,7 @@ export default function oneProject(project = null, action) {
 
   switch (type) {
     case SHOW_PROJECT:
-      return payload;
+      return Object.assign({}, payload);
     default:
       return project;
   }

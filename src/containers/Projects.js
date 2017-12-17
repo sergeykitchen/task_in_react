@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Table} from 'react-materialize';
 import ToolPanel from '../components/ToolPanel';
-import ModalAdder from '../components/ModalAdder';
+import ModalAdder from './ModalAdder';
 import ErrorMessage from '../components/ErrorMessage';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {updateData} from '../actions';
+import {SubmissionError} from 'redux-form';
+//import  SubmissionError } from 'react-redux';
 
 class Projects extends Component {
   state = {
@@ -52,22 +54,21 @@ class Projects extends Component {
       this.props.updateData();
       return;
     }
-    fetch(`http://localhost:3000/projects`, {
+    return fetch(`http://localhost:3000/project`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
       body: `name=${data}`
-    }).then(
-      () => {
-        this.props.updateData();
-      },
-      error => {
-        this.setState({
-          fail: error.message
+    }).then(response => {
+      if (response.status >= 400) {
+        throw new SubmissionError({
+          _error: 'project wasn`t added: network error'
         });
+      } else {
+        this.props.updateData();
       }
-    );
+    });
   };
 
   render() {

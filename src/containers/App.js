@@ -12,25 +12,25 @@ class App extends React.Component {
       return <Projects {...props} data={this.props.projects} />;
     };
 
-    // if (!this.state.fail) {
-    return (
-      <Router>
-        <div>
-          <Header />
-          <Route exact path="/" component={WrapperProjects} />
-          <Route path="/:id" component={ProjectInfo} />
-        </div>
-      </Router>
-    );
-    /* }
-    return <ErrorMessage error={this.state.fail} />;*/
+    if (!this.props.errors) {
+      return (
+        <Router>
+          <div>
+            <Header />
+            <Route exact path="/" component={WrapperProjects} />
+            <Route path="/:id" component={ProjectInfo} />
+          </div>
+        </Router>
+      );
+    }
+    return <ErrorMessage error={this.props.errors} />;
   }
 }
 
 export default connect(state => {
-  const {projects} = state;
-
+  const {projects, errors} = state;
   return {
-    projects: projects
+    projects,
+    errors
   };
 })(App);

@@ -1,11 +1,11 @@
 import {call, put, takeEvery, all} from 'redux-saga/effects';
 import * as actions from '../actions';
 
-export function fetchData(url, method, id) {
+export function fetchData(url, method) {
   return fetch(url, {method: method})
     .then(response => {
       if (response.status !== 200) {
-        return Promise.reject(new Error(response.statusText));
+        throw new Error(response.statusText);
       }
       return Promise.resolve(response);
     })
