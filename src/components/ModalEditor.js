@@ -6,16 +6,6 @@ import ReactTooltip from 'react-tooltip';
 import FormEditor from '../containers/FormEditor';
 
 class ModalEdit extends Component {
-  state = {
-    value: ''
-  };
-
-  handlerOnChange = (e, value) => {
-    this.setState({
-      value: value
-    });
-  };
-
   render() {
     const {openWindow, closeWindow, isOpen, id, oldName, edit} = {
       ...this.props

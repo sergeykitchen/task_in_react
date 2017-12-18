@@ -20,19 +20,20 @@ class ModalRemoval extends Component {
           border
           delayShow={500}
         />
-        <Modal
-          isOpen={isOpen}
-          contantLabel="Delete project"
-          onRequestClose={closeWindow}
-          className="modal delete"
-        >
-          <FormRemoval
-            isOpen={isOpen}
-            closeWindow={closeWindow}
-            id={id}
-            remove={remove}
-          />
-        </Modal>
+        <div>
+          {isOpen && (
+            <Modal>
+              <div className="modal delete">
+                <FormRemoval
+                  isOpen={isOpen}
+                  closeWindow={closeWindow}
+                  id={id}
+                  remove={remove}
+                />
+              </div>
+            </Modal>
+          )}
+        </div>
       </div>
     );
   }
