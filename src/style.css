@@ -135,6 +135,7 @@ form .error {
   font-size: 20px;
 }
 
-.black {
-  color: green;
+form .del {
+  color: rgb(0, 5, 0);
+  background: #fff;
 }

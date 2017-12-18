@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {updateData} from '../actions';
 import {SubmissionError} from 'redux-form';
-//import  SubmissionError } from 'react-redux';
 
 class Projects extends Component {
   state = {
@@ -28,28 +27,27 @@ class Projects extends Component {
     });
   };
 
-  editProject = (id, value) => () => {
-    if (!value) {
+  editProject = (id, value, oldValue) => () => {
+    if (!value || value === oldValue) {
       this.props.updateData();
       return;
     }
 
-    fetch(`http://localhost:3000/projects/${id}`, {
+    return fetch(`http://localhost:3000/projects/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
       body: `name=${value}`
-    }).then(
-      () => {
-        this.props.updateData();
-      },
-      error => {
-        this.setState({
-          fail: error.message
+    }).then(response => {
+      if (response.status >= 400) {
+        throw new SubmissionError({
+          _error: 'project wasn`t edited: network error'
         });
+      } else {
+        this.props.updateData();
       }
-    );
+    });
   };
 
   addProject = data => () => {

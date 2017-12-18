@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Field, reduxForm, formValueSelector} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {Button} from 'react-materialize';
 import {connect} from 'react-redux';
 
@@ -17,7 +17,7 @@ class FormRemoval extends Component {
           <Button className="right" type="submit">
             delete
           </Button>
-          {error && <div className="error black">{error}</div>}
+          {error && <div className="error del">{error}</div>}
         </div>
       </form>
     );

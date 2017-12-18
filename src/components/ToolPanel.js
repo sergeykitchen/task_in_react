@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Col} from 'react-materialize';
 import ModalRemoval from './ModalRemoval';
-import ModalEditer from './ModalEditer';
+import ModalEditor from './ModalEditor';
 
 export default class ToolPanel extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class ToolPanel extends Component {
 
     return (
       <div className="color">
-        <ModalEditer id={id} name={name} edit={this.props.edit} />
+        <ModalEditor id={id} oldName={name} edit={this.props.edit} />
         <ModalRemoval id={id} remove={this.props.remove} />
       </div>
     );

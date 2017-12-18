@@ -5,21 +5,29 @@ import {connect} from 'react-redux';
 
 class FormAdder extends Component {
   render() {
+    const {closeWindow, add, handleSubmit, error, name} = this.props;
+
     return (
-      <form onSubmit={this.props.handleSubmit(this.props.add(this.props.name))}>
+      <form onSubmit={handleSubmit(add(name))}>
         <h3>Create new project</h3>
 
         <label>Enter Name</label>
 
-        <Field type="text" name="projectName" component="input" autoFocus />
+        <Field
+          type="text"
+          name="projectName"
+          component="input"
+          autoFocus
+          autoComplete="off"
+        />
 
-        <Button type="button" onClick={this.props.closeWindow}>
+        <Button type="button" onClick={closeWindow}>
           cancel
         </Button>
         <Button type="submit" className="right">
           create
         </Button>
-        {this.props.error && <div className="error">{this.props.error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
     );
   }

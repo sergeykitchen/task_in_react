@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import {Icon, Input, Button} from 'react-materialize';
 import toggleWindow from '../decorators/toggleWindow';
 import ReactTooltip from 'react-tooltip';
+import FormEditor from '../containers/FormEditor';
 
 Modal.defaultStyles.overlay.zIndex = 1000;
 
@@ -18,7 +19,9 @@ class ModalEdit extends Component {
   };
 
   render() {
-    const {openWindow, closeWindow, isOpen, id, name, edit} = {...this.props};
+    const {openWindow, closeWindow, isOpen, id, oldName, edit} = {
+      ...this.props
+    };
     return (
       <div className="inline">
         <span data-tip="edit project" data-for="edit" onClick={openWindow}>
@@ -31,20 +34,13 @@ class ModalEdit extends Component {
           onRequestClose={closeWindow}
           className="modal edit"
         >
-          <h3>Edit project with id {id}</h3>
-          <Input
-            s={6}
-            autoFocus
-            type="text"
-            label="Enter new data"
-            validate
-            defaultValue={name}
-            onChange={this.handlerOnChange}
+          <FormEditor
+            oldName={oldName}
+            isOpen={isOpen}
+            closeWindow={closeWindow}
+            edit={edit}
+            id={id}
           />
-          <Button onClick={closeWindow}>cancel</Button>
-          <Button className="right" onClick={edit(id, this.state.value.trim())}>
-            save
-          </Button>
         </Modal>
       </div>
     );
