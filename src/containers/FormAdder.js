@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Field, reduxForm, formValueSelector} from 'redux-form';
-import {Button, Input} from 'react-materialize';
+import {Button} from 'react-materialize';
 import {connect} from 'react-redux';
 
 class FormAdder extends Component {

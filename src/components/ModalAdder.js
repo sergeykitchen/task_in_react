@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import {Button} from 'react-materialize';
-import Modal from 'react-modal';
-import {initialize} from 'redux-form';
+import Modal from './Modal';
 import ReactTooltip from 'react-tooltip';
 import toggleWindow from '../decorators/toggleWindow';
-import MyModal from '../components/MyModal';
 import FormAdder from '../containers/FormAdder';
 
 class ModalAdder extends Component {
   render() {
-    const {openWindow, closeWindow, isOpen, add} = this.props;
+    const {openWindow, closeWindow, isOpen, add, id} = this.props;
 
     return (
       <div>
@@ -23,9 +21,20 @@ class ModalAdder extends Component {
           onClick={openWindow}
         />
         <ReactTooltip id="edit" className="toolTheme" border delayShow={500} />
-        <MyModal extraClass="adder" {...this.props}>
-          <FormAdder add={add} isOpen={isOpen} closeWindow={closeWindow} />
-        </MyModal>
+        <div>
+          {isOpen && (
+            <Modal>
+              <div className="modal edit">
+                <FormAdder
+                  isOpen={isOpen}
+                  closeWindow={closeWindow}
+                  add={add}
+                  id={id}
+                />
+              </div>
+            </Modal>
+          )}
+        </div>
       </div>
     );
   }

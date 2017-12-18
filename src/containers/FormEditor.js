@@ -5,14 +5,12 @@ import {Button} from 'react-materialize';
 
 class FormEditor extends Component {
   render() {
-    console.log(this.props);
     const {
       handleSubmit,
       id,
       name,
       closeWindow,
       edit,
-      isOpen,
       oldName,
       error
     } = this.props;

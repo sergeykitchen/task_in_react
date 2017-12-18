@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Col} from 'react-materialize';
 import ModalRemoval from './ModalRemoval';
 import ModalEditor from './ModalEditor';
 

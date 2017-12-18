@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Field, reduxForm} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import {Button} from 'react-materialize';
-import {connect} from 'react-redux';
 
 class FormRemoval extends Component {
   render() {
@@ -10,6 +9,7 @@ class FormRemoval extends Component {
     return (
       <form onSubmit={handleSubmit(remove(id))}>
         <h3>Delete project?</h3>
+        <input type="submit" autoFocus />
         <div className="tool">
           <Button type="button" onClick={closeWindow}>
             cancel

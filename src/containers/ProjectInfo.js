@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ErrorMessage from '../components/ErrorMessage';
 import {connect} from 'react-redux';
 import {loadProject} from '../actions';
 
@@ -17,9 +16,6 @@ class ProjectInfo extends Component {
       </div>
     );
   }
-
-  //  return <ErrorMessage error={this.state.fail} />;
-  //}
 }
 
 export default connect(

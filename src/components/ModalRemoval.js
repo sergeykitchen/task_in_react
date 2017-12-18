@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Modal from 'react-modal';
-import {Icon, Button} from 'react-materialize';
+import Modal from './Modal';
+import {Icon} from 'react-materialize';
 import toggleWindow from '../decorators/toggleWindow';
 import ReactTooltip from 'react-tooltip';
 import FormRemoval from '../containers/FormRemoval';

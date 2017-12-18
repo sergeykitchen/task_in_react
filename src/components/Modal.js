@@ -1,6 +1,5 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {createPortal} from 'react-dom';
-import FormRemoval from '../containers/FormRemoval';
 
 export default class ModalRemoval extends Component {
   componentWillMount() {
